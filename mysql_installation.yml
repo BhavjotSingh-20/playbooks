@@ -1,0 +1,19 @@
+---
+- hosts: ubuntu-worker
+  gather_facts: no
+  vars:
+    mysql_root_password: password
+  tasks:
+    - name : Install mysql
+      apt: name={{ item }} update_cache=yes cache_valid_time=3600 state=present
+      become: yes
+      with_items:
+           - mysql-server
+           - python3-pymysql
+    - name: start up the mysql service
+      shell: "service mysql start"
+      become: yes
+    - name: ensure mysql is enabled to run on startup
+      service: name=mysql state=started enabled=true
+      become: yes
+
