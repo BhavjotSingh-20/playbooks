@@ -1,5 +1,5 @@
 ---
-- hosts: ubuntu-worker
+- hosts: 192.168.2.45
   gather_facts: no
   vars:
     mysql_root_password: password
